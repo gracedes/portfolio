@@ -5,14 +5,20 @@ body {
 
 .window {
     background-color: white;
-    width: 70%;
+    width: min(70%, 1000px);
     height: fit-content;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 75px;
+    margin-bottom: 75px;
 
     border-style: solid;
     border-color: #999999;
     border-width: 4px;
+
+    font-family: "Atkinson Hyperlegible Next", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .wbar {
@@ -33,20 +39,55 @@ body {
 }
 
 .item {
-    height: 200px;
+    height: 160px;
     margin-left: 50px;
     margin-right: 50px;
-    text-align: center;
+    text-align: left;
 }
 .item img {
     height: 150px;
     float: left;
     border-radius: 15px;
+    margin-right: 25px;
+}
+.item img:hover {
+    filter: brightness(75%);
+}
+.item h1 {
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 25px;
+    margin-bottom: 0px;
+}
+.item .tag {
+    font-size: 13px;
+    background-color: #d2d2d2;
+    border-radius: 15px;
+    width: fit-content;
+    padding: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    float: left;
+}
+.item .tag:hover {
+    background-color: #999999;
+}
+.item p {
+    height: fit-content;
+    margin-bottom: 0px;
+}
+.item a {
+    font-size: 13px;
+    color: #ff9798;
+    margin-right: 3px;
 }
 
 .sep {
     width: 100%;
     margin: 5px;
+    height:fit-content;
 }
 .sep img {
     display:block;
