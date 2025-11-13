@@ -77,8 +77,9 @@ body {
 }
 .item p {
     height: fit-content;
-    margin-top: 0px;
+    margin-top: 7px;
     margin-bottom: 0px;
+    font-size: 17px;
 }
 .item a {
     font-size: 13px;
