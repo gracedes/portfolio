@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import background from '@images/site-assets/bgtile.png';
 
 import Head from "@components/head/Head.astro";
 import Window from "@components/Window.astro";
@@ -14,7 +15,7 @@ const games = (await getCollection('games')).sort(
 	<head>
 		<Head />
 	</head>
-	<body>
+	<body style={`background-image: url(${background.src})`}>
 		<main class="windows">
 			{games.map((game) => (
 			<Window
@@ -30,6 +31,10 @@ const games = (await getCollection('games')).sort(
 </html>
 
 <style>
+	body {
+		background-repeat: repeat;
+	}
+
 	.windows {
 		display: flex;
 		flex-wrap: wrap;
