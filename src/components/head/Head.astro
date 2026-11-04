@@ -1,0 +1,23 @@
+---
+//import Favicon from "@components/head/favicon.astro"    // TODO: add later
+import OGTags from "@components/head/OGTags.astro"
+// import SEOTags from "@components/head/SEOTags.astro" TODO: generate later
+
+import { TITLE, DESCRIPTION } from "@vars"
+---
+<!-- TODO: add sitemap -->
+<head>
+    <meta charset="utf-8">
+
+    <!-- TODO: add sitemap -->
+    <title>{TITLE}</title>
+    <meta name="description" content={DESCRIPTION}>
+
+    <script data-goatcounter="https://gracedes.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+
+    <OGTags />
+    <!-- <SEOTags /> -->
+
+    <!-- <Favicon /> -->
+</head>

@@ -1,0 +1,165 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+    name: string;
+    description: string;
+    image?: ImageMetadata;
+    tags?: string[];
+    links?: { itch?: string; github?: string };
+}
+
+const { name, description, image, tags = [], links = {} } = Astro.props;
+const linkEntries = Object.entries(links).filter(([, url]) => url);
+---
+
+<div class="window">
+    <div class="wbar" />
+    <div class="window-content">
+        {image && <Image src={image} alt={name} />}
+
+        <h1>{name}</h1>
+        
+        {tags.length > 0 && (
+            <ul class="tags">
+                {tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+        )}
+
+        <p>{description}</p>
+
+        {linkEntries.length > 0 && (
+            <ul class="links">
+                {linkEntries.map(([name, url]) => (
+                    <li><a href={url} target="_blank" rel="noopener noreferrer">{name}</a></li>
+                ))}
+            </ul>
+        )}
+    </div>
+</div>
+
+<style>
+    .window {
+        flex: 0 1 clamp(260px, 45vw, 420px);
+        height: fit-content;
+        margin: 0;
+
+        background-color: white;
+        border-style: solid;
+        border-color: #999999;
+        border-width: 4px;
+    }
+
+    .wbar {
+        background-color: #d2d2d2;
+        width: 100%;
+        height: 44px;
+
+        font-family: "Press Start 2P", system-ui;
+        font-style: normal;
+        color: #999999;
+        line-height: 44px;
+    }
+
+    /* Wide layout: image on the left, text on the right */
+    .window-content {
+        display: grid;
+        grid-template-columns: 2fr 3fr;
+        gap: 10px 20px;
+        padding: 16px;
+        align-items: start;
+
+        font-family: "Atkinson Hyperlegible Next", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .window-content :global(img) {
+        grid-column: 1;
+        grid-row: 1 / span 4;
+
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px;
+        transition: filter 0.2s;
+    }
+
+    .window-content :global(img:hover) {
+        filter: brightness(75%);
+    }
+
+    .window-content h1 {
+        grid-column: 2;
+        margin: 0;
+        font-weight: bold;
+        font-size: 25px;
+        line-height: 1.1;
+    }
+
+    .window-content p {
+        grid-column: 2;
+        margin: 0;
+        font-size: 17px;
+    }
+
+    .window-content .tags {
+        grid-column: 2;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .window-content .tags li {
+        font-size: 13px;
+        background-color: #d2d2d2;
+        border-radius: 15px;
+        padding: 1px 8px;
+        transition: background-color 0.2s;
+    }
+
+    .window-content .tags li:hover {
+        background-color: #999999;
+    }
+
+    .window-content .links {
+        grid-column: 2;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .window-content .links a {
+        font-size: 13px;
+        color: #ff9798;
+    }
+
+    /* Narrow layout: used when the viewport is taller than it is wide */
+    @media (orientation: portrait) {
+        .window-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .window-content :global(img) {
+            width: 100%;
+            max-width: 360px;
+            height: 180px;
+        }
+
+        .window-content .tags,
+        .window-content .links {
+            justify-content: center;
+        }
+    }
+</style>
